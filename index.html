@@ -5,34 +5,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" >
 		<title> GILIE/SP </title>
 		<meta name="author" content="Denis Fernandes">
-					
 		
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css" >
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		
-			
-		<!-- /* bootstrap */ datatable */ css-->		
-		<!--<link rel="stylesheet" href="bootstrap4/bootstrap.css">
-		<script src="bootstrap4/bootstrap.js"></script>		-->
-		
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">				
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/estilo9.css">
 		<link rel="stylesheet" href="css/datatable.css">				
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>	
  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
     	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-    	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />		
-		
+    	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css"/>		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 	</head>
 				
 	<body onload='monta_tabela()'>
 	<div class="pagina">				
 	<header>
 		<!-- MENU -->
-		<nav class="navbar navbar-expand-lg cor-padrao nav-cobranca">  
+		<nav class="navbar navbar-expand-lg cor-padrao">  
 			<div class="mr-auto">    				
 				<span class='ml-3' style='font-size:16px; font-weight:400;'>GILIE/SP</span>			  
 				<span id="ajuda" class='ml-3 my-auto' title='PSI 9702 - Denis Fernandes [C093805-4]'><i class='far fa-bell' style='font-size:16px;'></i></span>		  
@@ -57,39 +48,46 @@
 			  </ul>    
 			</div>
 		</nav>		
-	
 	</header>		
 
 	<div id="tabela" class="m-4">    <!-- Espaço para a tabela -->
 	</div>
 		
-	<div id="graficos" name="graficos" class="row mx-2 my-5">
-		<div class="card col-6 mt-5 ml-auto p-0">
-			<div class="card-header" style='font-weight:400'>MODALIDADE&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;QUANTIDADE
+	<div id="graficos" name="graficos" class="m-0" style='display:none'>
+		<div class="row mx-2 mt-5">
+			<div class="card col-6 mt-5 ml-0 p-0">
+				<div class="card-header bg-primary text-white text-center" style='font-weight:400'>QUANTIDADE POR MODALIDADE
+				</div>
+				<div class="col-12 ml-auto">					
+					<div class="graficos" id="grafico-modalidade-qtde"></div>					
+				</div>
+			</div>				
+			<div class="card col-6 mt-5 ml-auto p-0">
+				<div class="card-header bg-primary text-white text-center" style='font-weight:400'>VALOR TOTAL POR MODALIDADE (R$)
+				</div>
+				<div class="col-12 ml-auto">					
+					<div class="graficos" id="grafico-modalidade-valor"></div>					
+				</div>			
+			</div>	
+		</div>
+		<div class="row ml-2">
+			<div class="card col-6 mt-5 ml-0 p-0">
+				<div class="card-header bg-primary text-white text-center" style='font-weight:400'>DESCONTO PERCENTUAL MÉDIO POR MODALIDADE
+				</div>
+				<div class="col-12 ml-auto">					
+					<div class="graficos" id="grafico-modalidade-desconto"></div>					
+				</div>
 			</div>
-			<div class="col-12 ml-auto">					
-				<div class="graficos" id="grafico-modalidade-qtde"></div>					
-			</div>
-		</div>	
-		
-		<div class="card col-6 mt-5 ml-auto p-0">
-			<div class="card-header" style='font-weight:400'>MODALIDADE&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;VALOR 
-			</div>
-			<div class="col-12 ml-auto">					
-				<div class="graficos" id="grafico-modalidade-valor"></div>					
-			</div>			
 		</div>	
 	</div>			
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>	 
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
 		
 	<script type="text/javascript">
 		
-		 $(document).ready(function() {    
-		 
+		 $(document).ready(function() {		 
 			$('#btnFiltros').click(function(){				
 				var tabela = $("#tabela-imoveis").DataTable();				
 				var coluna_filtro = $('#nome-filtro').val() - 1;				
@@ -115,7 +113,7 @@
 		function define_base(tipo){			
 			$("#graficos").hide();
 			var dados = [];				
-			dados.push({modalidade:"Modalidade", valor:"Valor", qtde:"Qtde"});					
+			dados.push({modalidade:"Modalidade", valor:"Valor", qtde:"Qtde", desconto:"Desconto" , percdesconto:"% Desconto"});					
 			var tabela = $('#tabela-imoveis').DataTable();
 			var linhas = tabela.rows( { filter : 'applied'} ).data();		
 				
@@ -130,15 +128,18 @@
 				valor_tratado = parseFloat(valor_tratado.replace(",","."));
 				pos = dados.map(function(e) { return e.modalidade; });				
 				var indice = pos.indexOf(value[3]);					
-				if (indice < 0){					
-					dados.push({modalidade:value[3], valor:valor_tratado ,qtde:1});					
+				if (indice < 0){										
+					dados.push({modalidade:value[3], valor:valor_tratado ,qtde:1 , desconto:parseFloat(value[6]) , percdesconto:parseFloat(value[6])});												
 				}else{
 					var qtde = dados[indice].qtde;
 					var valor = parseFloat(dados[indice].valor);
+					var desconto = parseFloat(dados[indice].desconto);					
 					dados[indice].qtde = qtde + 1;
 					dados[indice].valor = valor + parseFloat(valor_tratado);
+					dados[indice].desconto = (desconto + parseFloat(value[6]));					
+					dados[indice].percdesconto = (desconto + parseFloat(value[6])) / (qtde+1);					
 					
-				}
+				}				
 			})
 			
 			if (linhas.length>0) {				
@@ -147,17 +148,16 @@
 					dados = dados.map(item => [item.modalidade,item.qtde]);
 				}else if (tipo == "Valor"){
 					dados = dados.map(item => [item.modalidade,item.valor]);
+				}else if (tipo == "Desconto"){					
+					dados = dados.map(item => [item.modalidade,(item.percdesconto)]);					
 				}
 				$("#graficos").show(); 
-			}
-				
-			console.log(dados)			;
+			}				
 			return dados;
 				
 		}
 		
-		function monta_tabela(){									
-			
+		function monta_tabela(){			
 			$.ajax({
 				type: 'GET',
 				dataType: 'json',
@@ -183,8 +183,8 @@
 						
 					for (i = 0; i < response.length; i++) {												
 					    tabela += "<tr class='linha-tabela'>";
-						tabela += "<td class='trunca'>" + response[i].endereco + "</td>";	
-						tabela += "<td class='trunca'>" + response[i].bairro + "</td>";	
+						tabela += "<td title='"  + response[i].endereco + "' class='trunca'>" + response[i].endereco + "</td>";	
+						tabela += "<td title='"  + response[i].bairro + "'class='trunca'>" + response[i].bairro + "</td>";	
 						tabela += "<td class='trunca'>" + response[i].cidade + "</td>";	
 						tabela += "<td class='trunca'>" + response[i].modalidadeVenda + "</td>";	
 						tabela += "<td class='text-right'>" + parseFloat(response[i].precoOferta.replace(",",".")).toLocaleString('pt-br', {minimumFractionDigits: 2}) + "</td>";	
@@ -196,7 +196,7 @@
 					$("#tabela").html(tabela);					
 					
 					$("#tabela-imoveis").DataTable({						
-						"lengthMenu": [[25, 50, 100, -1], [25, 50, 100, "Todos"]],
+						"lengthMenu": [[15, 50, 100, -1], [15, 50, 100, "Todos"]],
 						"order": [],
 						"language": {	
 							"sProcessing":   "A processar...",
@@ -244,6 +244,8 @@
 			}]);			
 			var numero = "0";	
 			var options = {				
+				legend: {position:'top'},
+				hAxis: {slantedTextAngle: 45}, 
 				width: 650,
 				height: 600,
 				chartArea: {width: '70%'},
@@ -256,8 +258,7 @@
 			});
 			formatar.format(data, 1);
 			var chart = new google.visualization.ColumnChart(document.getElementById('grafico-modalidade-qtde'));			
-			chart.draw(view, options);
-			
+			chart.draw(view, options);			
 			
 			// modalidade x valor
 			var dados = define_base("Valor")
@@ -272,6 +273,7 @@
 				type: 'string',				
 			}]);			
 			var options = {
+				legend: {position:'top'},
 				width: 650,
 				height: 600,
 				chartArea: {width: '70%'},
@@ -284,9 +286,36 @@
 				groupingSymbol: '.',				
 				prefix: 'R$ '
 			});
-			formatado.format(data, 1);	
-			
+			formatado.format(data, 1);				
 			var chart = new google.visualization.ColumnChart(document.getElementById('grafico-modalidade-valor'));			
+			chart.draw(view, options);			
+			
+			// MODALIDADE X DESCONTO MÉDIO
+			var dados = define_base("Desconto")
+			var data = google.visualization.arrayToDataTable(			  
+				dados			
+			);
+			var view = new google.visualization.DataView(data);
+			view.setColumns([0, 1, {
+				calc: 'stringify',
+				role: 'annotation',
+				sourceColumn: 1,
+				type: 'string',				
+			}]);	
+			var numero = "0.00";			
+			var options = {
+				legend: {position:'top'},
+				width: 650,
+				height: 600,
+				chartArea: {width: '70%'},
+				vAxis: {minValue: 0}
+				
+			};
+			var formatar = new google.visualization.NumberFormat({
+				pattern: numero,				
+			});
+			formatar.format(data, 1);			
+			var chart = new google.visualization.ColumnChart(document.getElementById('grafico-modalidade-desconto'));			
 			chart.draw(view, options);
 			
 		}
