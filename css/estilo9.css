@@ -1,0 +1,38 @@
+/*======RESET======*/
+* {margin: 0; padding: 0; font-size: 100%; border: none; outline: none; font-weight: 300; box-sizing: border-box; font-family: 'Lato', sans-serif;}
+body {background-color: #fff; display: block;}
+a {text-decoration: none;cursor: pointer; opacity: 1;}
+a:hover {opacity: 1.2;}
+ul {list-style: none;}
+img {width: 100%;}
+
+html, body {height:100%;}
+
+.pagina
+{
+	min-height:100%;
+    position:relative;
+	padding-bottom: 80px;
+}
+
+.cor-padrao{	
+	background-image: linear-gradient(to right,#0059b3,	#63b8ab);	
+	color: white;		
+}
+#tabela-imoveis{
+	font-size: 0.8rem;		
+	line-height: 15px;
+}
+#tabela-imoveis thead th:nth-child(1){
+    width:280px !important;
+}
+.trunca{
+  max-width: 23ch;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+	display: none;
+}
